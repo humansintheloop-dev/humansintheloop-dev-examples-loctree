@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// ParseArgs parses command-line arguments and returns the directory path
 func ParseArgs(args []string) (string, error) {
 	if len(args) == 0 {
 		return "", fmt.Errorf("Usage: loctree <directory_path>")
@@ -14,21 +15,22 @@ func ParseArgs(args []string) (string, error) {
 		return "", fmt.Errorf("Expected exactly one argument, got %d", len(args))
 	}
 	
-	path := args[0]
-	
-	// Basic validation - check if path exists
+	return args[0], nil
+}
+
+// ValidatePath checks if the given path exists and is a directory
+func ValidatePath(path string) error {
 	info, err := os.Stat(path)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return "", fmt.Errorf("Error: Path does not exist: %s", path)
+			return fmt.Errorf("Error: Path does not exist: %s", path)
 		}
-		return "", fmt.Errorf("Error accessing path: %v", err)
+		return fmt.Errorf("Error accessing path: %v", err)
 	}
 	
-	// Check if it's a directory
 	if !info.IsDir() {
-		return "", fmt.Errorf("Error: Path is not a directory: %s", path)
+		return fmt.Errorf("Error: Path is not a directory: %s", path)
 	}
 	
-	return path, nil
+	return nil
 }
