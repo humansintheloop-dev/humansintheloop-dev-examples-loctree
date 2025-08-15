@@ -1,5 +1,7 @@
 package tree
 
+import "sort"
+
 // DirectoryNode represents a directory in the tree structure
 type DirectoryNode struct {
 	Name       string
@@ -39,5 +41,20 @@ func (n *DirectoryNode) CalculateLOC() {
 	for _, child := range n.Children {
 		child.CalculateLOC()
 		n.LOC += child.LOC
+	}
+}
+
+// SortChildren sorts the immediate children by LOC (descending)
+func (n *DirectoryNode) SortChildren() {
+	sort.Slice(n.Children, func(i, j int) bool {
+		return n.Children[i].LOC > n.Children[j].LOC
+	})
+}
+
+// SortChildrenRecursive sorts all children and their descendants by LOC (descending)
+func (n *DirectoryNode) SortChildrenRecursive() {
+	n.SortChildren()
+	for _, child := range n.Children {
+		child.SortChildrenRecursive()
 	}
 }

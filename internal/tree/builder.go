@@ -89,5 +89,8 @@ func BuildTree(rootPath string) (*DirectoryNode, error) {
 	// Calculate total LOC for all nodes
 	root.CalculateLOC()
 	
+	// Sort all nodes by LOC (descending)
+	root.SortChildrenRecursive()
+	
 	return root, nil
 }

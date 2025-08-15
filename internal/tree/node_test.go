@@ -90,3 +90,57 @@ func TestCalculateLOC(t *testing.T) {
 		t.Errorf("Expected root LOC 75, got %d", root.LOC)
 	}
 }
+
+func TestSortChildren_ByLOC(t *testing.T) {
+	root := NewDirectoryNode("root", "/root")
+	
+	child1 := NewDirectoryNode("small", "/root/small")
+	child1.LOC = 10
+	
+	child2 := NewDirectoryNode("large", "/root/large")
+	child2.LOC = 50
+	
+	child3 := NewDirectoryNode("medium", "/root/medium")
+	child3.LOC = 25
+	
+	root.AddChild(child1)
+	root.AddChild(child2)
+	root.AddChild(child3)
+	
+	root.SortChildren()
+	
+	// Should be sorted by LOC descending: large (50), medium (25), small (10)
+	if root.Children[0].Name != "large" {
+		t.Errorf("Expected first child to be 'large', got '%s'", root.Children[0].Name)
+	}
+	if root.Children[1].Name != "medium" {
+		t.Errorf("Expected second child to be 'medium', got '%s'", root.Children[1].Name)
+	}
+	if root.Children[2].Name != "small" {
+		t.Errorf("Expected third child to be 'small', got '%s'", root.Children[2].Name)
+	}
+}
+
+func TestSortChildren_Recursive(t *testing.T) {
+	root := NewDirectoryNode("root", "/root")
+	
+	child := NewDirectoryNode("child", "/root/child")
+	grandchild1 := NewDirectoryNode("gc1", "/root/child/gc1")
+	grandchild1.LOC = 5
+	grandchild2 := NewDirectoryNode("gc2", "/root/child/gc2")
+	grandchild2.LOC = 15
+	
+	child.AddChild(grandchild1)
+	child.AddChild(grandchild2)
+	root.AddChild(child)
+	
+	root.SortChildrenRecursive()
+	
+	// Grandchildren should also be sorted
+	if child.Children[0].Name != "gc2" {
+		t.Errorf("Expected first grandchild to be 'gc2' (LOC=15), got '%s'", child.Children[0].Name)
+	}
+	if child.Children[1].Name != "gc1" {
+		t.Errorf("Expected second grandchild to be 'gc1' (LOC=5), got '%s'", child.Children[1].Name)
+	}
+}
