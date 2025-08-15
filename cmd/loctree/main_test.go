@@ -48,6 +48,12 @@ func TestMainIntegration_ValidDirectory(t *testing.T) {
 	
 	output := stdout.String()
 	if !strings.Contains(output, "Scanning: /tmp") {
-		t.Errorf("Expected 'Scanning: /tmp', got: %s", output)
+		t.Errorf("Expected 'Scanning: /tmp' in output, got: %s", output)
+	}
+	if !strings.Contains(output, "Total LOC:") {
+		t.Errorf("Expected 'Total LOC:' in output, got: %s", output)
+	}
+	if !strings.Contains(output, "Files scanned:") {
+		t.Errorf("Expected 'Files scanned:' in output, got: %s", output)
 	}
 }

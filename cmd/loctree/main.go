@@ -5,6 +5,7 @@ import (
 	"os"
 	
 	"github.com/user/loctree/internal/cli"
+	"github.com/user/loctree/internal/scanner"
 )
 
 func main() {
@@ -22,6 +23,16 @@ func main() {
 		os.Exit(1)
 	}
 	
-	// For now, just print the path we're scanning
+	// Scan the directory
 	fmt.Printf("Scanning: %s\n", path)
+	result, err := scanner.ScanDirectory(path)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error scanning directory: %v\n", err)
+		os.Exit(1)
+	}
+	
+	// Display results
+	fmt.Printf("Total LOC: %d\n", result.TotalLOC)
+	fmt.Printf("Files scanned: %d\n", result.FilesScanned)
+	fmt.Printf("Directories scanned: %d\n", result.DirsScanned)
 }
