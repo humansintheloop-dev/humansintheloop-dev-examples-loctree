@@ -1,0 +1,13 @@
+I want a GoLang TUI application that takes a directory of source code as an argument.
+
+It will show the total LOC in the directory.
+
+I can expand a directory and it will show the LOC for each subdirectory
+
+I can expand subdirectories recursively to see more details.
+
+I can also collapse directory to hide the details.
+
+The each directory is shown as LOC directory name.
+
+The subdirectories are indented.
