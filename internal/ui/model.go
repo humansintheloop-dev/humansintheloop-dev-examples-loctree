@@ -36,6 +36,16 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "q", "ctrl+c":
 			m.quitting = true
 			return m, tea.Quit
+			
+		case "up", "k":
+			if m.SelectedIndex > 0 {
+				m.SelectedIndex--
+			}
+			
+		case "down", "j":
+			if m.SelectedIndex < len(m.VisibleNodes)-1 {
+				m.SelectedIndex++
+			}
 		}
 	}
 	return m, nil
