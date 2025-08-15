@@ -46,6 +46,20 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if m.SelectedIndex < len(m.VisibleNodes)-1 {
 				m.SelectedIndex++
 			}
+			
+		case " ", "enter":
+			// Toggle expand/collapse
+			if m.SelectedIndex < len(m.VisibleNodes) {
+				node := m.VisibleNodes[m.SelectedIndex]
+				if len(node.Children) > 0 {
+					node.ToggleExpanded()
+					m.updateVisibleNodes()
+					// Adjust selected index if needed
+					if m.SelectedIndex >= len(m.VisibleNodes) {
+						m.SelectedIndex = len(m.VisibleNodes) - 1
+					}
+				}
+			}
 		}
 	}
 	return m, nil
