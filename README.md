@@ -2,6 +2,12 @@
 
 A terminal user interface (TUI) application that provides an interactive, hierarchical view of lines of code (LOC) counts for a given directory structure.
 
+<img src="loctree-screenshot.png">
+
+## How this application was developed
+
+The application was written entirely by Claude Code, using the TODO development workflow.
+
 ## Features
 
 - 📊 Displays total LOC count for directories
