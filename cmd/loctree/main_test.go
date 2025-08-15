@@ -53,7 +53,7 @@ func TestMainIntegration_ValidDirectory(t *testing.T) {
 	if !strings.Contains(output, "Total LOC:") {
 		t.Errorf("Expected 'Total LOC:' in output, got: %s", output)
 	}
-	if !strings.Contains(output, "Files scanned:") {
-		t.Errorf("Expected 'Files scanned:' in output, got: %s", output)
+	if !strings.Contains(output, "Tree structure:") {
+		t.Errorf("Expected 'Tree structure:' in output, got: %s", output)
 	}
 }
