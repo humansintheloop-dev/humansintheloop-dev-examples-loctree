@@ -6,7 +6,7 @@ A terminal user interface (TUI) application that provides an interactive, hierar
 
 ## How this application was developed
 
-The application was written entirely by Claude Code, using the TODO development workflow.
+The application was written entirely by Claude Code, using the https://github.com/humansintheloop-dev/humansintheloop-dev-workflow-and-tools[Humans in the loop development workflow and tools]
 
 ## Features
 
